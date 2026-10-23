@@ -5,7 +5,7 @@ crisperwhisper==2.0.1
 ctranslate2-crisperwhisper==4.7.1.post3
 torch==2.8.0+cu126
 torchaudio==2.8.0+cu126
-transformers==4.48.3
+transformers==4.57.6
 numpy==2.2.6
 soundfile==0.14.0
 soxr==1.1.0
