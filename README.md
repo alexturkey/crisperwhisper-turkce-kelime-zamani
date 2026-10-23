@@ -109,16 +109,25 @@ GTX 1050 Ti 4 GB, WSL2 Ubuntu 24.04, i7-7700HQ. Method and the full table: [docs
 
 | set | audio | WER | model work (ASR + alignment) |
 |---|---|---|---|
-| Turkish, 8 files | 192 s | 1.4% (5/363); 0/363 ignoring the circumflex (`hâlâ` → `hala`) | 21.1 s + 6.9 s |
-| English, 2 files | 11.3 s | 0% (0/34) | 7.2 s + 7.8 s |
-| Japanese, 1 file | 7.5 s | CER 9.4% (3/32 chars; `今日` written as `きょう`) | 3.2 s + 0.5 s |
+| Turkish, 8 files (synthetic TTS) | 192 s | **0% (0/363)**; raw 1.4%: all 5 errors are the circumflex (`hâlâ` → `hala`), not counted as errors | 21.1 s + 6.9 s |
+| English, 2 files (1 TTS, 1 real room recording) | 11.3 s | 0% (0/34) | 7.2 s + 7.8 s |
+| **Turkish, FLEURS tr_tr test, 10 real recordings** | 122 s | **10.1% (18/178)** (no circumflex in this set) | 17.2 s + 3.6 s |
+| Japanese, 1 file (TTS) | 7.5 s | CER 9.4% (3/32 chars; `今日` written as `きょう`) | 3.2 s + 0.5 s |
 
 Batch mode, all 12 items in one run: 602 s wall clock, of which about 480 s is importing torch and loading models from a
 Windows drive mounted into WSL2. Single-file runs pay that loading every time (459-727 s per file here), so pass
-several files or `--liste`. Peak VRAM: 1371 MB (ASR) / 1653 MB (alignment).
+several files or `--liste`. Peak VRAM: 1371 MB (ASR) / up to 2411 MB (alignment).
 
-The WER set is tiny and synthetic (seven VoxCPM2 voices reading known Turkish texts from our sister project), so it
-shows the pipeline works end to end, not how it does on your recordings. Word-time accuracy was **not** measured
+The synthetic rows are clean TTS voices: they show the pipeline works end to end, not how it does on real or noisy
+recordings. The FLEURS row is real read speech (Google FLEURS, tr_tr test, first 10 clips, CC BY 4.0); about half of
+its errors are spelling conventions rather than mishearing (numbers written as words, `yöntemi ile` → `yöntemiyle`,
+`çevrimiçi` → `çevrim içi`), the rest are names and rare words (`Meşhed` → `Meşet`, `sezyum` → `sezium`). Examples:
+
+| FLEURS reference | ours |
+|---|---|
+| … bir yolcu uçağı **Meşhed'deki** bir pisti aşarak … | … bir yolcu uçağı **Meşet'teki** bir pisti aşarak … |
+| … Upolu adasındadır ve **40.000'in** biraz altında … | … Upol Adası'ndadır ve **kırk binin** biraz altında … |
+| … doğru bir şekilde yorumlama **yöntemi ile** … | … doğru bir şekilde yorumlama **yöntemiyle** … | Word-time accuracy was **not** measured
 against hand labels; the method's behaviour is described in `docs/diller.md`. Nyra reports CrisperWhisper 2.0's
 numbers on their own benchmark (`github.com/nyrahealth/CrisperWhisper`); those are theirs, not ours.
 

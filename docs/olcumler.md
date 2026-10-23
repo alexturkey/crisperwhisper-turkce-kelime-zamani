@@ -33,7 +33,7 @@ listed after the table.
 | tr_ornek | 13.3 | 26 | 0.0% (0/26) | 2.1 | 0.4 | 26/26 |
 | tr_tok_anlatici | 28.4 | 55 | 1.8% (1/55) | 2.6 | 1.0 | 55/55 |
 | tr_yasli_bilge | 29.1 | 43 | 4.7% (2/43) | 2.6 | 1.0 | 43/43 |
-| **Turkish total** | 192.0 | 363 | **1.4% (5/363)** | 21.1 | 6.9 | 363/363 |
+| **Turkish total** | 192.0 | 363 | **0% (0/363)** without circumflex · raw 1.4% (5/363) | 21.1 | 6.9 | 363/363 |
 | en_tts | 7.9 | 25 | 0.0% (0/25) | 5.6 | 7.7 | 25/25 |
 | en_voices | 3.4 | 9 | 0.0% (0/9) | 1.6 | 0.1 | 9/9 |
 | ja_tts | 7.5 | 33 chars | CER 9.4% (3/32 chars) | 3.2 | 0.5 | 31/33 (2 interpolated) |
@@ -44,11 +44,40 @@ Shared cost of the whole 12-item run (one ASR process, one alignment process): t
 ASR process 326 s (import 80 s, CrisperWhisper load 200 s, decoding the rest); alignment process 268 s
 (import 34 s, model loads 167 s: English 16 s, Japanese 108 s, Turkish 43 s). Peak VRAM 1371 MB (ASR) / 1653 MB (alignment).
 
+## Real recordings: FLEURS Turkish
+
+Run 2026-10-23 09:29-09:32, same machine, **fresh venv from a clean copy of this repo** (`kur.sh --adim python,ayar`),
+batch mode, 11 items (`ornek/ornek.mp3` + 10 FLEURS clips). Data: Google FLEURS (`google/fleurs`, revision `70bb2e8`),
+`tr_tr` test split, the first 10 clips in `audio/test.tar.gz` order, reference = `raw_transcription`. License CC BY 4.0
+(dataset card). Audio is not in this repo.
+
+| clip | s | words | WER |
+|---|---|---|---|
+| 1 | 14.2 | 20 | 5.0% (1/20) |
+| 2 | 12.4 | 14 | 0.0% (0/14) |
+| 3 | 11.1 | 11 | 27.3% (3/11) |
+| 4 | 16.6 | 24 | 0.0% (0/24) |
+| 5 | 15.8 | 26 | 3.8% (1/26) |
+| 6 | 4.2 | 6 | 0.0% (0/6) |
+| 7 | 10.2 | 14 | 35.7% (5/14) |
+| 8 | 9.1 | 17 | 11.8% (2/17) |
+| 9 | 5.8 | 11 | 9.1% (1/11) |
+| 10 | 22.2 | 35 | 14.3% (5/35) |
+| **total** | 121.6 | 178 | **10.1% (18/178)**, same with or without the circumflex |
+
+Every recognised word got a real CTC time (`ctc` for all of them). ASR decode 17.2 s, alignment 3.6 s for 121.6 s of audio. Whole
+11-item run 180 s wall clock (ASR process 90 s: import 17 s, model load 51 s; alignment process 89 s). Peak VRAM
+1371 MB (ASR) / 2411 MB (alignment). Roughly half of the errors are spelling conventions, not mishearing: `40.000'in`
+written as `kırk binin` (verbatim model writes numbers as spoken), `yöntemi ile` → `yöntemiyle`, `çevrimiçi` →
+`çevrim içi`, `Okulu'ndan` → `okulundan`; the rest are names and rare words (`Meşhed` → `Meşet`, `Upolu` → `Upol`,
+`sezyum` → `sezium`, `iyodin` → `iodin`, `nispeten` → `nispeden`, `Şehir` → `Şiir`). Ten clips is a smoke test,
+not a benchmark.
+
 ## Reading the numbers
 
 - **All five Turkish "errors" are the circumflex**: the reference writes `hâlâ`, `hikâye`; the model writes `hala`,
-  `hikaye` (the common modern spelling). Ignoring the circumflex, Turkish WER is 0/363 on this set. The normaliser
-  keeps the circumflex on purpose, so the table shows the raw number.
+  `hikaye` (the common modern spelling). The headline number does not count the circumflex
+  as an error (0/363); the per-file rows and `tests/wer_olc.py` show the raw count (5/363).
 - **Japanese**: word WER means nothing for unspaced text, so the row gives character error rate. All three character
   errors are one word: `今日` (kanji) was written `きょう` (the same reading in kana).
 - **Synthetic audio is easy audio.** Every file except `en_voices` is clean synthetic (TTS) speech. This set shows the pipeline

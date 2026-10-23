@@ -23,6 +23,12 @@ below is bundled in this repository**: models and packages are downloaded by `sc
 `ornek/ornek.mp3` is a synthetic Turkish voice generated with VoxCPM2 in our sister project
 (github.com/alexturkey/voxcpm2-turkce-ses-tasarimi, Apache-2.0); no real person's voice. Its text is `ornek/ornek_metin.txt`.
 
+## Measurement data (not in this repository)
+
+`docs/olcumler.md` and the README quote short text excerpts and results from **Google FLEURS** (`google/fleurs`,
+tr_tr test split), CC BY 4.0, © Google; Conneau et al., "FLEURS: Few-shot Learning Evaluation of Universal
+Representations of Speech", 2022. No FLEURS audio is distributed here.
+
 ## Model card notice
 
 The CrisperWhisper license forbids commercial use without a separate license and the use of outputs to train

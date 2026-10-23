@@ -108,16 +108,25 @@ GTX 1050 Ti 4 GB, WSL2 Ubuntu 24.04, i7-7700HQ. Yöntem ve tam tablo: [docs/olcu
 
 | set | ses | WER | model işi (ASR + hizalama) |
 |---|---|---|---|
-| Türkçe, 8 dosya | 192 sn | %1,4 (5/363); şapka yok sayılınca 0/363 (`hâlâ` → `hala`) | 21,1 sn + 6,9 sn |
-| İngilizce, 2 dosya | 11,3 sn | %0 (0/34) | 7,2 sn + 7,8 sn |
-| Japonca, 1 dosya | 7,5 sn | CER %9,4 (3/32 karakter; `今日` → `きょう`) | 3,2 sn + 0,5 sn |
+| Türkçe, 8 dosya (yapay TTS) | 192 sn | **%0 (0/363)**; ham %1,4: 5 hatanın hepsi şapka (`hâlâ` → `hala`), şapka hata sayılmadı | 21,1 sn + 6,9 sn |
+| İngilizce, 2 dosya (1 TTS, 1 gerçek oda kaydı) | 11,3 sn | %0 (0/34) | 7,2 sn + 7,8 sn |
+| **Türkçe, FLEURS tr_tr test, 10 gerçek kayıt** | 122 sn | **%10,1 (18/178)** (bu sette şapka yok) | 17,2 sn + 3,6 sn |
+| Japonca, 1 dosya (TTS) | 7,5 sn | CER %9,4 (3/32 karakter; `今日` → `きょう`) | 3,2 sn + 0,5 sn |
 
 Toplu kip, 12 öğe tek koşuda: 602 sn; bunun yaklaşık 480 sn'si torch'un açılması ve modellerin WSL2'ye bağlı Windows
 diskinden yüklenmesi. Tek dosyalık koşu bu yüklemeyi her seferinde öder (burada dosya başı 459-727 sn); birden çok
-dosya ya da `--liste` verin. VRAM tepe: 1371 MB (ASR) / 1653 MB (hizalama).
+dosya ya da `--liste` verin. VRAM tepe: 1371 MB (ASR) / en çok 2411 MB (hizalama).
 
-WER seti küçük ve yapay (kardeş projedeki yedi VoxCPM2 sesinin bilinen Türkçe metinleri okuması): hattın uçtan uca
-çalıştığını gösterir, sizin kayıtlarınızdaki başarıyı değil. Kelime zamanı doğruluğu elle işaretli veriyle
+Yapay satırlar temiz TTS sesleridir: hattın uçtan uca çalıştığını gösterir, gerçek ya da gürültülü kayıttaki başarıyı
+göstermez. FLEURS satırı gerçek okuma kaydıdır (Google FLEURS, tr_tr test, ilk 10 kayıt, CC BY 4.0); hatalarının
+yaklaşık yarısı yanlış duyma değil yazım geleneği (sayı yazıyla, `yöntemi ile` → `yöntemiyle`, `çevrimiçi` → `çevrim içi`),
+kalanı özel ad ve seyrek kelime (`Meşhed` → `Meşet`, `sezyum` → `sezium`). Örnek:
+
+| FLEURS gerçek metin | bizim çıktı |
+|---|---|
+| … bir yolcu uçağı **Meşhed'deki** bir pisti aşarak … | … bir yolcu uçağı **Meşet'teki** bir pisti aşarak … |
+| … Upolu adasındadır ve **40.000'in** biraz altında … | … Upol Adası'ndadır ve **kırk binin** biraz altında … |
+| … doğru bir şekilde yorumlama **yöntemi ile** … | … doğru bir şekilde yorumlama **yöntemiyle** … | Kelime zamanı doğruluğu elle işaretli veriyle
 **ölçülmedi**; yöntemin davranışı `docs/diller.md`'de. Nyra, CrisperWhisper 2.0 sayılarını kendi benchmark'ında verir
 (`github.com/nyrahealth/CrisperWhisper`); o sayılar onların, bizim değil.
 
