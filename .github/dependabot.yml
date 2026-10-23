@@ -17,6 +17,17 @@ updates:
       - dependency-name: "torchaudio"
       - dependency-name: "ctranslate2-crisperwhisper"
       - dependency-name: "crisperwhisper"
+      # numpy 2.3+ drops Python 3.10 (2.5.x needs 3.12); README promises 3.10-3.12
+      - dependency-name: "numpy"
+        versions: [">=2.3"]
+      # transformers 5.x is a major API change (Wav2Vec2 CTC alignment); updated by hand after a GPU test.
+      # transformers 4.x needs tokenizers <0.22 and huggingface_hub <1.0, so those bumps cannot install alone.
+      - dependency-name: "transformers"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "tokenizers"
+        versions: [">=0.22"]
+      - dependency-name: "huggingface_hub"
+        versions: [">=1.0"]
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
