@@ -6,7 +6,7 @@ ctranslate2-crisperwhisper==4.7.1.post3
 torch==2.8.0+cu126
 torchaudio==2.8.0+cu126
 transformers==4.48.3
-numpy==2.2.6
+numpy==2.5.4
 soundfile==0.14.0
 soxr==1.1.0
 # indirect pins that matter for reproducibility (pip freeze of the clean install)
