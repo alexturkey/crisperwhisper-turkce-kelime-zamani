@@ -1,0 +1,25 @@
+# Dependabot: requirements.txt bağımlılıklarını haftada bir denetler, güncelleme için PR açar (birleştirme elle, test sonrası).
+version: 2
+updates:
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 3
+    labels: ["bagimlilik"]
+    commit-message:
+      prefix: "bagimlilik"
+    ignore:
+      # torch is pinned to the cu126 wheel on purpose (cu128 Linux wheels drop sm_61); CT2 fork and crisperwhisper are
+      # updated by hand after a GPU test (the converter's config.json behaviour changed between releases)
+      - dependency-name: "torch"
+      - dependency-name: "torchaudio"
+      - dependency-name: "ctranslate2-crisperwhisper"
+      - dependency-name: "crisperwhisper"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 2
+    labels: ["bagimlilik"]

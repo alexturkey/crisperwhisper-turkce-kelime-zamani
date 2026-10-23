@@ -1,0 +1,24 @@
+name: Dil raporu / Language report
+description: Deneysel bir dilde (tr/en/ja dışı) sonuç nasıl çıktı? / How did an experimental language (other than tr/en/ja) come out?
+title: "[dil] "
+labels: ["dil"]
+body:
+  - type: input
+    id: dil
+    attributes:
+      label: Dil kodu / Language code
+      placeholder: "de"
+    validations:
+      required: true
+  - type: input
+    id: ses
+    attributes:
+      label: Ses süresi ve türü / Audio length and kind
+      placeholder: "4 dk, tek konuşmacı, podcast"
+  - type: textarea
+    id: sonuc
+    attributes:
+      label: Ne gördünüz / What you saw
+      description: "`ozet`: TRANSKRIPT_OK satırı, kelimeler.json → hizalama.yontem_sayilari, birkaç yanlış kelime/zaman örneği. / the TRANSKRIPT_OK line, hizalama.yontem_sayilari from kelimeler.json, a few wrong word/time examples."
+    validations:
+      required: true

@@ -1,0 +1,62 @@
+{
+  "aciklama": "Pinned downloads. Every file is fetched from a fixed commit and verified with sha256 before use; a hash mismatch stops the installer. Weights are never stored in this repository.",
+  "asr": {
+    "model": "nyralabs/CrisperWhisper2.0_turbo",
+    "lisans": "nyra health Non-Commercial Research License v1.0 (weights); MIT (inference code)",
+    "commit": "de0369c8a68025b7f6e86387b6eb5a3b369787c8",
+    "safetensors_sha256": "0121a185b87ada7497f22dfbcd6c86b5f599b69dfcc8676e37f36447caf0b630",
+    "safetensors_bayt": 1617907538,
+    "dosyalar": [
+      "model.safetensors",
+      "config.json",
+      "generation_config.json",
+      "added_tokens.json",
+      "merges.txt",
+      "normalizer.json",
+      "preprocessor_config.json",
+      "special_tokens_map.json",
+      "tokenizer.json",
+      "tokenizer_config.json",
+      "vocab.json",
+      "LICENSE.md",
+      "README.md"
+    ],
+    "ct2_depolama": "float16",
+    "ct2_calisma": "int8",
+    "referans_model_bin_sha256": "da1660d26d465818afc047dbfd8f9fa6239defb669bbd9285b8551c8d927ecb9",
+    "referans_model_bin_bayt": 1617964289
+  },
+  "hizalama": {
+    "tr": {
+      "model": "mpoyraz/wav2vec2-xls-r-300m-cv7-turkish",
+      "lisans": "CC BY 4.0",
+      "commit": "708639f50559d7970f462e13ec64d3f059ca89f6",
+      "dosyalar": {
+        "pytorch_model.bin": "008d69c82bf45c82ec5485e550abc86ddabefe75080f22e1ebfdc1699889d82e",
+        "config.json": null,
+        "preprocessor_config.json": null,
+        "special_tokens_map.json": null,
+        "tokenizer_config.json": null,
+        "vocab.json": null
+      }
+    },
+    "en": {
+      "model": "torchaudio WAV2VEC2_ASR_BASE_960H",
+      "lisans": "MIT (fairseq weights) / BSD-2 (torchaudio)",
+      "url": "https://download.pytorch.org/torchaudio/models/wav2vec2_fairseq_base_ls960_asr_ls960.pth",
+      "sha256": "488fd4f16de84438ffc945334278c1b9fb9b7159a806c1080b16111a958c945d"
+    },
+    "ja": {
+      "model": "jonatasgrosman/wav2vec2-large-xlsr-53-japanese",
+      "lisans": "Apache-2.0",
+      "commit": "cf031e020336460d15a417eba710bbc5bb43be9a",
+      "dosyalar": {
+        "pytorch_model.bin": "4f6821dcd79770fcd4c11487c4ee5c040b3a7e1863425224014ba5ea8fbc1b67",
+        "config.json": null,
+        "preprocessor_config.json": null,
+        "special_tokens_map.json": null,
+        "vocab.json": null
+      }
+    }
+  }
+}

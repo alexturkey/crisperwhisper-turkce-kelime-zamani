@@ -1,0 +1,17 @@
+crisperwhisper-turkce-kelime-zamani
+Copyright 2026 Ali Haydar Ozturk
+
+This repository's own code is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+It drives third-party models that are NOT part of this repository and are downloaded by the installer:
+
+- CrisperWhisper 2.0 Turbo weights (nyralabs/CrisperWhisper2.0_turbo) are licensed under the
+  "nyra health Non-Commercial Research License Agreement" (non-commercial use only; commercial use requires a
+  separate license from Nyra Health GmbH). The CrisperWhisper inference code (PyPI `crisperwhisper`,
+  `ctranslate2-crisperwhisper`) is licensed under the MIT License. The CTranslate2 conversion made on your machine
+  by the installer is a derivative of the weights and stays under the same non-commercial license: do not
+  redistribute it.
+- wav2vec2 CTC alignment checkpoints keep their own licenses (see THIRD_PARTY.md), e.g.
+  mpoyraz/wav2vec2-xls-r-300m-cv7-turkish (CC BY 4.0), jonatasgrosman/wav2vec2-large-xlsr-53-japanese (Apache-2.0).
+
+Not affiliated with Nyra Health, OpenNMT, Meta or the authors of the alignment checkpoints.

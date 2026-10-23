@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Soru-Cevap / Q&A (Discussions)
+    url: https://github.com/alexturkey/crisperwhisper-turkce-kelime-zamani/discussions
+    about: Kurulum ve kullanım soruları, başka dillerde sonuç raporları için önce buraya. / Install and usage questions, reports from other languages, go here first.

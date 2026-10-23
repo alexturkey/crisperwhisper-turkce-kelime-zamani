@@ -1,0 +1,15 @@
+# Pinned after the clean-root install on 2026-10-23 (WSL2 Ubuntu 24.04, Python 3.12). torch/torchaudio come from
+# https://download.pytorch.org/whl/cu126 (kur.sh passes --extra-index-url). cu126, not cu128: the Linux cu128 wheels drop
+# sm_61 (GTX 1050 Ti / Pascal); measured 2026-10-23: cu128 → 'no kernel image is available', cu126 → runs. ctranslate2-crisperwhisper has Linux wheels only.
+crisperwhisper==2.0.1
+ctranslate2-crisperwhisper==4.7.1.post3
+torch==2.8.0+cu126
+torchaudio==2.8.0+cu126
+transformers==4.48.3
+numpy==2.2.6
+soundfile==0.14.0
+soxr==1.1.0
+# indirect pins that matter for reproducibility (pip freeze of the clean install)
+huggingface_hub==0.36.2
+tokenizers==0.21.4
+safetensors==0.8.0

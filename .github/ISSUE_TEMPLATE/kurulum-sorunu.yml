@@ -1,0 +1,46 @@
+name: Kurulum sorunu / Install problem
+description: kur.sh, WSL2, CUDA, model indirme ya da ilk çalıştırma düşüyor / installer, WSL2, CUDA, model download or first run fails
+title: "[kurulum] "
+labels: ["kurulum"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Önce [AGENTS.md](../blob/main/AGENTS.md) "Sorun giderme" tablosuna bakın. / Check the troubleshooting table in [AGENTS.md](../blob/main/AGENTS.md) first.
+  - type: input
+    id: gpu
+    attributes:
+      label: Ekran kartı ve sürücü / GPU and driver
+      description: "WSL ya da Linux içinde `nvidia-smi --query-gpu=name,driver_version,memory.total --format=csv,noheader`"
+      placeholder: "NVIDIA GeForce GTX 1050 Ti, 581.29, 4096 MiB"
+    validations:
+      required: true
+  - type: input
+    id: sistem
+    attributes:
+      label: İşletim sistemi / OS
+      description: "Linux dağıtımı ya da Windows sürümü + WSL dağıtımı (`wsl -l -v`)"
+      placeholder: "Windows 10 22H2 + WSL2 Ubuntu 24.04"
+    validations:
+      required: true
+  - type: input
+    id: python
+    attributes:
+      label: Python
+      description: "`python3 --version` (WSL/Linux içinde)"
+      placeholder: "Python 3.12.3"
+  - type: input
+    id: komut
+    attributes:
+      label: Çalıştırılan komut / Command you ran
+      placeholder: "bash scripts/kur.sh --kok /mnt/e/stt"
+    validations:
+      required: true
+  - type: textarea
+    id: hata
+    attributes:
+      label: Hata çıktısı / Error output
+      description: Son 30 satır; son geçen `*_OK` satırı dahil. / Last 30 lines, including the last `*_OK` marker.
+      render: text
+    validations:
+      required: true

@@ -1,0 +1,19 @@
+# yerel ayar ve çıktılar / local settings and outputs
+ayarlar.json
+cikti/
+_calisma/
+*.part
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+# ağırlıklar ve indirmeler asla / weights and downloads never
+*.safetensors
+*.bin
+*.pth
+*.ct2
+model/
+hf/
+torch/
+indirme/
