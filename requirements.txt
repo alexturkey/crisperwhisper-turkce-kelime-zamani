@@ -11,5 +11,5 @@ soundfile==0.14.0
 soxr==1.1.0
 # indirect pins that matter for reproducibility (pip freeze of the clean install)
 huggingface_hub==0.36.2
-tokenizers==0.21.4
+tokenizers==0.23.3
 safetensors==0.8.0
