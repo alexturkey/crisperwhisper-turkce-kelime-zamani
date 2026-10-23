@@ -14,7 +14,8 @@
 - Toplu kip: `python -m transkript a.mp3 b.wav` ya da `--liste isler.tsv`; modeller bir kez yüklenir, bir dosyanın
   hatası diğerlerini durdurmaz.
 - `--kontrol` gerçek bir CUDA çekirdeği koşturur (yalnız `is_available` değil).
-- Ölçümler GTX 1050 Ti 4 GB'da (`docs/olcumler.md`).
+- Ölçümler GTX 1050 Ti 4 GB'da (`docs/olcumler.md`); WER iki sayı: normalize (ana, kurallar `tests/wer_olc.py`) ve ham.
+  FLEURS tr_tr 10 gerçek kayıt: normalize %6,2, ham %10,1.
 
 **EN**
 - CrisperWhisper 2.0 Turbo (CTranslate2, CUDA int8, verbatim) + wav2vec2 CTC forced alignment for word times;
@@ -26,4 +27,5 @@
 - Batch mode: `python -m transkript a.mp3 b.wav` or `--liste jobs.tsv`; models load once, one file's failure does not
   stop the others.
 - `--kontrol` runs a real CUDA kernel (not only `is_available`).
-- Measurements on a GTX 1050 Ti 4 GB (`docs/olcumler.md`).
+- Measurements on a GTX 1050 Ti 4 GB (`docs/olcumler.md`); WER as two numbers: normalised (main, rules in
+  `tests/wer_olc.py`) and raw. FLEURS tr_tr, 10 real recordings: normalised 6.2%, raw 10.1%.
