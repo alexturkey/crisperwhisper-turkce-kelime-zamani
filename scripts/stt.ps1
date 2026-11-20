@@ -1,4 +1,4 @@
-# Windows'tan çalıştırma / run from Windows: ses dosyasını WSL yoluna çevirip CLI'yi WSL venv'inde koşturur.
+﻿# Windows'tan çalıştırma / run from Windows: ses dosyasını WSL yoluna çevirip CLI'yi WSL venv'inde koşturur.
 #   powershell -NoProfile -ExecutionPolicy Bypass -File scripts\stt.ps1 -Ses C:\ses\kayit.mp3 -Dil tr [-Cikti C:\ses\cikti] [-Dagitim Ubuntu] [-Ek "--bicim json,srt"]
 param(
     [Parameter(Mandatory = $true)][string]$Ses,

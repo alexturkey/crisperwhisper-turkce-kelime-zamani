@@ -1,4 +1,4 @@
-# Windows sarmalayıcı / Windows wrapper: kurulumu WSL2 Ubuntu içinde çalıştırır (CTranslate2 çatalının yalnız Linux wheel'i var).
+﻿# Windows sarmalayıcı / Windows wrapper: kurulumu WSL2 Ubuntu içinde çalıştırır (CTranslate2 çatalının yalnız Linux wheel'i var).
 #   powershell -NoProfile -ExecutionPolicy Bypass -File scripts\kur.ps1 -Kok E:\stt            # kök Windows yolu, WSL'de /mnt/e/stt olur
 #   powershell -NoProfile -ExecutionPolicy Bypass -File scripts\kur.ps1 -Kok E:\stt -Diller "tr en ja" -Dagitim Ubuntu
 # Gerekenler: WSL2 + Ubuntu 22.04/24.04 (`wsl --install -d Ubuntu`, bir kez yönetici), Windows NVIDIA sürücüsü >= 570 (WSL'de nvidia-smi çalışır).
