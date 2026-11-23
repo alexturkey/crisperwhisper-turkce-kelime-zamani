@@ -1,5 +1,11 @@
-blank_issues_enabled: true
+blank_issues_enabled: false
 contact_links:
+  - name: Security problem / Güvenlik sorunu (private)
+    url: https://github.com/alexturkey/crisperwhisper-turkce-kelime-zamani/security/advisories/new
+    about: Do not open a public issue. Report privately; see SECURITY.md. / Herkese açık issue açmayın, gizli bildirin.
   - name: Soru-Cevap / Q&A (Discussions)
     url: https://github.com/alexturkey/crisperwhisper-turkce-kelime-zamani/discussions
     about: Kurulum ve kullanım soruları, başka dillerde sonuç raporları için önce buraya. / Install and usage questions, reports from other languages, go here first.
+  - name: Help and response times / Yardım ve yanıt süreleri
+    url: https://github.com/alexturkey/crisperwhisper-turkce-kelime-zamani/blob/main/SUPPORT.md
+    about: Where to go for what (goals, not commitments). / Hangi iş için nereye gidilir (hedef, taahhüt değil).

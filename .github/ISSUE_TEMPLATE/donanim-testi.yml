@@ -1,0 +1,46 @@
+name: Hardware test / Donanım testi
+description: Report a run on your GPU or in another language / Kendi kartınızda ya da başka bir dilde deneme raporu
+labels: ["donanim"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Install problem? Use the Install problem form instead. One language is enough (English or Turkish).
+        Kurulum sorunu için Kurulum sorunu formunu kullanın. Tek dil yeter.
+        You can fill the machine line with `bash scripts/tani.sh --kart-satiri` (local, hides personal names, sends nothing).
+  - type: input
+    id: donanim
+    attributes:
+      label: "GPU, VRAM, driver, RAM / Kart, VRAM, sürücü, RAM"
+      placeholder: "NVIDIA GeForce GTX 1050 Ti, 4096 MiB, 581.29, 16 GB"
+    validations:
+      required: true
+  - type: input
+    id: sistem
+    attributes:
+      label: "OS / İşletim sistemi"
+      placeholder: "Windows 10 22H2 + WSL2 Ubuntu 24.04"
+    validations:
+      required: true
+  - type: input
+    id: calisma
+    attributes:
+      label: "Command, language, audio length / Komut, dil, ses süresi"
+      placeholder: ".venv/bin/python -m transkript kayit.mp3 --dil tr (4 dk)"
+    validations:
+      required: true
+  - type: dropdown
+    id: sonuc
+    attributes:
+      label: "Result / Sonuç"
+      options:
+        - "TRANSKRIPT_OK, word times look right / kelime zamanları doğru görünüyor"
+        - "TRANSKRIPT_OK, some words or times are wrong / bazı kelime ya da zamanlar yanlış"
+        - "failed / düştü"
+    validations:
+      required: true
+  - type: textarea
+    id: ozet
+    attributes:
+      label: "Output line and examples / Çıktı satırı ve örnekler"
+      description: "The `TRANSKRIPT_OK` line (time, VRAM peak), `hizalama.yontem_sayilari` from kelimeler.json, a few wrong words with their times. Label each claim: [measured] [read] [guess]. Remove personal paths."

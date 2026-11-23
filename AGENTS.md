@@ -1,7 +1,7 @@
 # AGENTS.md — step-by-step install for an AI coding agent (Claude Code, Codex, Cursor...)
 
 For an agent setting this up on **Linux with an NVIDIA GPU (≥ 4 GB)** or on **Windows 10/11 through WSL2**. Every step
-has a command, the expected marker and a check. Do not skip a check. `CLAUDE.md` points here.
+has a command, the expected marker and a check. Do not skip a check. `CLAUDE.md`, `GEMINI.md` and `.github/copilot-instructions.md` point here; the quick card is `AGENTS_HIZLI.md` (decision tree and exit codes).
 
 Hard rules for agents in this repo:
 - The CrisperWhisper 2.0 weights are **non-commercial** (NOTICE). Never commit, upload or redistribute them or the
@@ -36,6 +36,7 @@ cd crisperwhisper-turkce-kelime-zamani
 
 ## 2. Install
 
+Dry run first (writes nothing, no network, lists every missing piece with a code): `bash scripts/kur.sh --kok ~/stt --kuru`.
 Linux / inside WSL: `bash scripts/kur.sh --kok ~/stt` (Windows from PowerShell: `scripts\kur.ps1 -Kok E:\stt`, which
 runs the same script inside WSL with `--kok /mnt/e/stt`). Takes ~15 min, downloads ~6 GB. Run it in the background
 and poll the log if your tool has a timeout. Markers, in order: `PYTHON_OK`, `MODEL_OK`, `DONUSUM_OK`, `HIZALAMA_OK`,
@@ -81,11 +82,15 @@ is mostly `ctc`; `kelimeler.srt` has one cue per word with increasing times.
 transkript/        __main__ (CLI), akis (flow), ses (audio), motor_isci (ASR worker), hizalama_isci (CTC worker),
                    cikti (txt/json/srt/vtt), diller (language table), ayarlar, donustur (CT2 conversion), kur_hizalama
 ayarlar/manifest.json   pinned commits + sha256 for every download
-scripts/           kur.sh (installer), kur.ps1 / stt.ps1 (Windows → WSL wrappers)
+scripts/           kur.sh (installer, --kuru dry run), kur.ps1 / stt.ps1 / kur.cmd (Windows → WSL wrappers),
+                   tani.sh (local diagnosis), denetim.py (quick checks), gizlilik_denetimi.py, dil_eslik_denetimi.py,
+                   on_kontrol.sh, repo_kapi.json (kit settings)
 ornek/             synthetic Turkish example (Apache-2.0) + its text
 tests/             unit tests without GPU: .venv/bin/python -m pytest tests -q
-docs/              diller.md (word units per language), olcumler.md (measurements)
-LICENSE (Apache-2.0), NOTICE (model license), THIRD_PARTY.md, ETHICS.md, SECURITY.md, CHANGELOG.md
+docs/              diller.md (word units per language), olcumler.md (measurements), SIK_HATALAR.md and
+                   hata_imzalari.json (error codes)
+LICENSE (Apache-2.0), NOTICE (model license), THIRD_PARTY.md, ETHICS.md, SECURITY.md, PRIVACY.md, SUPPORT.md,
+CONTRIBUTING.md, CODE_OF_CONDUCT.md, CHANGELOG.md, llms.txt
 ```
 
 ## 6. Measuring (maintainer)
@@ -93,3 +98,15 @@ LICENSE (Apache-2.0), NOTICE (model license), THIRD_PARTY.md, ETHICS.md, SECURIT
 `docs/olcumler.md` describes the method: known-text audio, WER with a plain normaliser (lowercase, punctuation
 removed), wall time per stage from `kelimeler.json` → `sureler`, VRAM peaks from `vram_tepe_mb`. Re-run the same set
 after any pin change and update the table; never quote numbers you did not produce.
+
+## 7. Install layout and agent discipline
+
+These rules apply to you (an AI agent) and to any sub-agent you start. They exist so that installing this repository leaves nothing behind outside two folders and downloads nothing twice.
+
+1. **Two places only.** The install root you pass with `--kok` (`-Kok` on Windows) holds `model/`, `hf/`, `torch/`, `pip/` and `indirme/` (map: README, "Disk layout and removal"). The repository folder holds `.venv/` and `ayarlar.json`. Do not create folders anywhere else (user profile, system temp, next to the root).
+2. **No trace outside them.** `scripts/kur.sh` points `PIP_CACHE_DIR`, `HF_HOME` and `TORCH_HOME` at the root for its own process only and only when they are empty (a value the user set is kept; `TMPDIR` always goes to the root); it does not change PATH, the user profile or the registry and needs no sudo (the single exception is `apt install python3-venv` that the prerequisites table may ask the human to run). Do not change any of that either; never run `pip install --user`, `setx` or edit a shell profile.
+3. **No double download.** A file with the right sha256 is skipped, so re-run with the same `--kok` instead of choosing a new root. An interrupted download continues from its `.part` file (a server that refuses ranges makes it start over); an existing `.venv/` or `ayarlar.json` is used where it is, never moved; never fetch the model into a second place and never start a second installer while one is running.
+4. **Measure first.** Run `bash scripts/kur.sh --kok <root> --kuru` (dry run: writes nothing, no network); it prints every `HATA:` / `UYARI:` line with a code such as `[STT-E-DISK]`. Tell the user the size and the sources and wait for a yes.
+5. **Show before you delete.** Removing anything (a half install, a cache, an old environment) is shown to the user first: path, size, why. Deleting the root and the repository folder is the supported uninstall; never delete outside them, never delete the user's own models or caches. The scripts delete only their own leftovers (`.part` files and a download whose sha256 does not match).
+6. **Same error twice: stop.** Do not try a third time; take the code and the first 20 lines of output to the user (`docs/hata_imzalari.json`, `docs/SIK_HATALAR.md`).
+7. **Sub-agents follow the same rules.** Put these rules in the brief of any agent you start; one install at a time; no agent edits `scripts/kur.sh` or the pins to get past a check.

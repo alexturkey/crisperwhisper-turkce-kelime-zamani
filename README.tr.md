@@ -11,6 +11,13 @@ hizalama her kelimeye başlangıç ve bitiş saniyesi verir. Çıktı: metin, ke
 > Research License). Bu deponun kodu Apache-2.0'dır ama aracı ücretli bir üründe çalıştırmak Nyra Health'ten ticari
 > lisans ister. Ağırlıklar depoda yok; kurulum betiği sabit bir commit'ten indirir. Bkz. [NOTICE](NOTICE).
 
+## Hızlı başlangıç
+
+1. **Önce makinenizi denetleyin, hiçbir şey inmez:** `bash scripts/kur.sh --kok ~/stt --kuru` (Windows: `scripts\kur.cmd` çalıştırıp `E:\stt` gibi kısa bir klasör yazın, ya da `powershell -NoProfile -ExecutionPolicy Bypass -File scripts\kur.ps1 -Kok E:\stt -Kuru`). Eksik her şeyi (kart, sürücü, disk, RAM, araçlar) tek listede gösterir.
+2. **Kurulum:** aynı komut `--kuru` olmadan (~15 dk, ~6 GB indirme; tekrar çalıştırmak güvenli).
+3. **İlk döküm:** `.venv/bin/python -m transkript ornek/ornek.mp3 --dil tr --cikti cikti/ilk`. Başarı: `TRANSKRIPT_OK dil=tr ...` satırı ve `cikti/ilk/kelimeler.srt`.
+4. **Bir şey düştü mü?** [docs/SIK_HATALAR.md](docs/SIK_HATALAR.md) dosyasına bakın ya da `bash scripts/tani.sh` çalıştırıp (yerel, isimsiz) çıktısını issue'ya yapıştırın.
+
 ## Ne alırsınız
 
 ```
@@ -142,6 +149,25 @@ göstermez. FLEURS (Google, tr_tr test bölümü, ilk 10 kayıt, CC BY 4.0) ger�
 testidir, benchmark değildir. Kelime zamanı doğruluğu elle işaretli veriyle **ölçülmedi**; yöntemin davranışı
 `docs/diller.md`'de. Nyra, CrisperWhisper 2.0 sayılarını kendi benchmark'ında verir
 (`github.com/nyrahealth/CrisperWhisper`); o sayılar onların, bizim değil.
+
+## Disk düzeni ve kaldırma
+
+`scripts/kur.sh`, `--kok` ile verdiğiniz köke ve depo klasörüne yazar; sistem PATH'i, kullanıcı profili ve registry'ye dokunmaz, sudo istemez.
+
+| Nerede | İçinde ne var | Boyut [etiket] |
+|---|---|---|
+| `<kok>/model/` | model indirmesi (`hf_turbo_<commit>/`) ve dönüştürülmüş CT2 modeli (`ct2_turbo/`) | yaklaşık 1,6 GB + 1,6 GB [yukarıdaki kurulum notundan okudum] |
+| `<kok>/hf/`, `<kok>/torch/` | hizalama modelleri (wav2vec2) | dil başına 0,4-1,3 GB [okudum] |
+| `<kok>/pip/` | pip önbelleği | [ölçmedim] |
+| `<kok>/indirme/` | geçici dosyalar (`TMPDIR`) ve `.part` indirmeleri | [ölçmedim] |
+| `<depo>/.venv/` | Python ortamı, torch yaklaşık 3 GB | yaklaşık 3 GB [okudum] |
+| `<depo>/ayarlar.json` | kurulumun yazdığı ayarlar | küçük |
+
+Önbellekler: yalnız kurulum sürecinin kendisi için `PIP_CACHE_DIR`, `HF_HOME` ve `TORCH_HOME` **boşsa** köke yönlenir; sizin tanımladığınız değer ezilmez ve kullanılır. `TMPDIR` her zaman köke gider. (Hizalama modelleri her durumda `<kok>/hf` ve `<kok>/torch` altına iner, çünkü çalışma anı onları oradan okur.) sha256'sı doğru dosya atlanır; aynı `--kok` ile yeniden çalıştırmak modeli ikinci kez indirmez; yarım kalan indirme `.part` dosyasından devam eder (`curl -C -`), sunucu aralık isteğini reddederse baştan başlar.
+
+Mevcut kurulumlar: klasör haritası değişmedi; depo klasöründeki `.venv/` ya da `ayarlar.json` varsa olduğu yerde kullanılır, taşınmaz. Kök düzeni yeni kurulumlar içindir; Python ortamı ve `ayarlar.json` bilerek depo klasöründe kalır.
+
+**Kaldırma:** kök klasörü ve depo klasörünü silin (ikincisi `.venv/` ve `ayarlar.json` içerir); kaldırma bu kadar. Başka yerdeki kendi modelleriniz ve önbelleklerinize dokunulmaz.
 
 ## Sınırlar
 

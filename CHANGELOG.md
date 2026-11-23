@@ -1,5 +1,23 @@
 # Sürüm notları / Release notes
 
+## Unreleased
+
+**TR**
+- Kurulumda `--kuru` (Windows: `kur.ps1 -Kuru`, çift tık: `scripts/kur.cmd`): hiçbir şey yazmaz ya da indirmez; kart, sürücü, disk, RAM ve araç eksiklerini tek listede, `[STT-E-...]` kodlarıyla basar (eksik varsa çıkış 3). Varsayılan kurulum davranışı değişmedi.
+- Yerel teşhis `scripts/tani.sh` (kişisel ad ve yolları siler, ağa çıkmaz); hata kodları `docs/hata_imzalari.json` ve `docs/SIK_HATALAR.md`.
+- Hızlı denetim `scripts/denetim.py --hizli` (gizlilik ve gizli karakter taraması, sabit sürümler, manifest, kalite sabitleri, README çeviri eşliği), `scripts/on_kontrol.sh`, CI (rapor modu, eylemler SHA'ya sabit).
+- Belgeler: CONTRIBUTING, PRIVACY, SUPPORT, CODE_OF_CONDUCT, AGENTS_HIZLI, llms.txt, GEMINI/CLAUDE/Copilot yönlendiricileri (tek kaynak AGENTS.md), PR şablonu, Donanım testi ve Soru/fikir issue formları, SECURITY'ye desteklenen sürümler ve ajan prompt-injection paragrafı, README'ye Hızlı başlangıç ve Disk düzeni ve kaldırma.
+- Kurulum düzeni: pip/HF/torch önbelleği yalnız boşsa köke yönlenir (sizin değeriniz ezilmez), yarım indirme `.part`'tan devam eder, mevcut `.venv`/`ayarlar.json` taşınmaz; `tests/test_kurulum_duzeni.py`.
+- Boş issue kapalı; güvenlik bildirimi ve destek bağlantıları issue ekranında.
+
+**EN**
+- Install gets `--kuru` (Windows: `kur.ps1 -Kuru`, double-click: `scripts/kur.cmd`): writes and downloads nothing; lists missing GPU, driver, disk, RAM and tools in one list with `[STT-E-...]` codes (exit 3 if anything is missing). The default install behaviour is unchanged.
+- Local diagnosis `scripts/tani.sh` (strips personal names and paths, no network); error codes in `docs/hata_imzalari.json` and `docs/SIK_HATALAR.md`.
+- Quick checks `scripts/denetim.py --hizli` (privacy and hidden-character scan, pinned versions, manifest, quality constants, README translation parity), `scripts/on_kontrol.sh`, CI (report mode, actions pinned to SHAs).
+- Docs: CONTRIBUTING, PRIVACY, SUPPORT, CODE_OF_CONDUCT, AGENTS_HIZLI, llms.txt, GEMINI/CLAUDE/Copilot pointers (single source AGENTS.md), PR template, Hardware test and Question/idea issue forms, supported versions and an agent prompt-injection paragraph in SECURITY, Quick start and Disk layout and removal in the README.
+- Install layout: pip/HF/torch caches point into the root only when empty (your own value is kept), interrupted downloads resume from `.part`, an existing `.venv`/`ayarlar.json` is never moved; `tests/test_kurulum_duzeni.py`.
+- Blank issues are off; security reporting and support links are on the issue chooser.
+
 ## v0.1.0 — 2026-10-23
 
 İlk sürüm / first release.

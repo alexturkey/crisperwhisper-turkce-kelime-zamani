@@ -4,3 +4,5 @@
 *.mp3 binary
 *.wav binary
 *.flac binary
+*.cmd text eol=crlf
+*.bat text eol=crlf

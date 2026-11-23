@@ -11,6 +11,13 @@ for every language the models know (`docs/diller.md`). Linux or Windows via WSL2
 > License). This repository's code is Apache-2.0, but running it inside a paid product needs a commercial license from
 > Nyra Health. Weights are not in this repo; the installer downloads them from a pinned commit. See [NOTICE](NOTICE).
 
+## Quick start
+
+1. **Check your machine first, nothing is downloaded:** `bash scripts/kur.sh --kok ~/stt --kuru` (Windows: `scripts\kur.cmd` and type a short folder such as `E:\stt`, or `powershell -NoProfile -ExecutionPolicy Bypass -File scripts\kur.ps1 -Kok E:\stt -Kuru`). It lists every missing piece (GPU, driver, disk, RAM, tools) in one go.
+2. **Install:** the same command without `--kuru` (~15 min, ~6 GB download; safe to re-run).
+3. **First transcript:** `.venv/bin/python -m transkript ornek/ornek.mp3 --dil tr --cikti cikti/ilk`. Success looks like `TRANSKRIPT_OK dil=tr ...` and `cikti/ilk/kelimeler.srt`.
+4. **Something failed?** Read [docs/SIK_HATALAR.md](docs/SIK_HATALAR.md), or run `bash scripts/tani.sh` and paste its (local, name-free) output into an issue.
+
 ## What you get
 
 ```
@@ -143,6 +150,25 @@ recordings. FLEURS (Google, tr_tr test split, first 10 clips, CC BY 4.0) is real
 test, not a benchmark. Word-time accuracy was **not** measured against hand labels; the method's behaviour is
 described in `docs/diller.md`. Nyra reports CrisperWhisper 2.0's numbers on their own benchmark
 (`github.com/nyrahealth/CrisperWhisper`); those are theirs, not ours.
+
+## Disk layout and removal
+
+`scripts/kur.sh` writes into the root you pass with `--kok` and into the repository folder; nothing goes to the system PATH, the user profile or the registry, and it needs no sudo.
+
+| Where | What is in it | Size [label] |
+|---|---|---|
+| `<kok>/model/` | the model download (`hf_turbo_<commit>/`) and the converted CT2 model (`ct2_turbo/`) | about 1.6 GB + 1.6 GB [read from the install notes above] |
+| `<kok>/hf/`, `<kok>/torch/` | alignment checkpoints (wav2vec2) | 0.4-1.3 GB per language [read] |
+| `<kok>/pip/` | pip cache | [not measured] |
+| `<kok>/indirme/` | temporary files (`TMPDIR`) and `.part` downloads | [not measured] |
+| `<repo>/.venv/` | the Python environment, torch about 3 GB | about 3 GB [read] |
+| `<repo>/ayarlar.json` | the settings the installer writes | small |
+
+Caches: for the installer's own process only, `PIP_CACHE_DIR`, `HF_HOME` and `TORCH_HOME` point into the root **when they are empty**; a value you set yourself is kept and used. `TMPDIR` always goes to the root. (The alignment checkpoints are always stored under `<kok>/hf` and `<kok>/torch`, because the runtime reads them from there.) A file with the right sha256 is skipped, so re-running with the same `--kok` does not download the model twice; an interrupted download continues from its `.part` file (`curl -C -`), and a server that refuses ranges makes it start over.
+
+Existing installs: the folder map is unchanged, and an existing `.venv/` or `ayarlar.json` in the repository folder is used where it is and never moved. The root layout applies to new installs; the Python environment and `ayarlar.json` stay in the repository folder by design.
+
+**Removal:** delete the root folder and the repository folder (the second holds `.venv/` and `ayarlar.json`). That is the whole uninstall. Your own models or caches elsewhere are never touched.
 
 ## Limits
 

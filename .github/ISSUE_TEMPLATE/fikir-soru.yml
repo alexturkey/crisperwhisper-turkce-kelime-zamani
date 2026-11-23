@@ -1,0 +1,21 @@
+name: Question or idea / Soru ya da fikir
+description: A question, a suggestion, or something unclear in the docs
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Install or run problem? Please use the Install problem form and read `docs/SIK_HATALAR.md` first. Security problem? Do not post it here: see `SECURITY.md`.
+        Kurulum ya da çalıştırma sorunu için Kurulum sorunu formunu kullanın. Güvenlik sorunu buraya yazılmaz: `SECURITY.md`.
+        One language is enough (English or Turkish). Tek dil yeter.
+  - type: textarea
+    id: soru
+    attributes:
+      label: "Your question or idea / Sorunuz ya da fikriniz"
+      description: "What do you want to do, and what is unclear? Label what you know: [measured] [read] [guess]. / Ne yapmak istiyorsunuz, neresi belirsiz?"
+    validations:
+      required: true
+  - type: input
+    id: ortam
+    attributes:
+      label: "Machine, if relevant / Makine (varsa)"

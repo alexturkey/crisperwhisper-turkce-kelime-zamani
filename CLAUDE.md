@@ -1,4 +1,5 @@
 # Claude Code notes
 
-Install and verification steps: see `AGENTS.md` (same rules for every agent). Non-commercial model weights (never
-commit or redistribute them), one GPU job at a time, Linux/WSL2 only, every download pinned by commit + sha256.
+Read AGENTS_HIZLI.md first (quick card: who does what, decision tree, exit code to action), then AGENTS.md (single source of truth for setup, rules and verification).
+
+@AGENTS.md

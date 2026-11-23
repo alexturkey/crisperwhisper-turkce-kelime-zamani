@@ -1,0 +1,7 @@
+{
+ "kaynak": "README.md",
+ "ceviriler": [
+  {"dil": "tr", "dosya": "README.tr.md", "kademe": "A"}
+ ],
+ "not": "Kademe A: kaynak her degistiginde ayni surumde guncellenir. Denetim yapi esligine bakar (baslik sayisi, kod blogu sayisi, yerel baglantilar); cumlelerin dogrulugunu insan okur."
+}

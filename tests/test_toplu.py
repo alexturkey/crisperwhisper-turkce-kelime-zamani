@@ -37,6 +37,8 @@ def test_motor_isci_modeli_bir_kez_yukler_hata_digerini_durdurmaz(monkeypatch):
 
 
 def test_hizalama_isci_dil_basina_bir_model(monkeypatch):
+    import pytest
+    pytest.importorskip("torch")  # torch yoksa (CI) atlanir / skipped without torch
     yuklenen = []
 
     class SahteModel:

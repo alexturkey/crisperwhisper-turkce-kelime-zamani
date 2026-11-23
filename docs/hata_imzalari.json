@@ -1,0 +1,237 @@
+{
+ "surum": 1,
+ "aciklama_en": "Stable error/warning codes for the STT install and run scripts. Codes printed as [STT-E-...] / [STT-W-...] come from `scripts/kur.sh --kuru` and `scripts/tani.sh`; older lines of the scripts (sha256, KONTROL_HATA ...) keep their text and are matched by `imza` (plain case-insensitive substrings, no regular expressions on purpose: no ReDoS on untrusted log text). Headings and exit codes never change.",
+ "aciklama_tr": "STT kurulum ve calistirma betikleri icin kararli hata/uyari kodlari. [STT-E-...] / [STT-W-...] olarak yazilanlar `scripts/kur.sh --kuru` ve `scripts/tani.sh` ciktisindandir; betiklerin eski satirlari (sha256, KONTROL_HATA ...) metnini korur ve `imza` ile eslenir (duz, buyuk/kucuk harf duyarsiz alt dizeler; bilerek duzenli ifade yok). Basliklar ve cikis kodlari degismez.",
+ "kodlar": [
+  {
+   "kod": "STT-E-ARAC",
+   "tur": "hata",
+   "yayinlayan": [
+    "kur.sh --kuru"
+   ],
+   "baslik_en": "Python, venv, curl or sha256sum missing",
+   "baslik_tr": "Python, venv, curl ya da sha256sum eksik",
+   "imza": [
+    "[STT-E-ARAC]"
+   ],
+   "ilk_adim_en": "Install the named tool (Ubuntu: `sudo apt install python3-venv curl`, the only sudo you may need), then run the dry run again.",
+   "ilk_adim_tr": "Adı geçen aracı kurun (Ubuntu: `sudo apt install python3-venv curl`, gerekebilecek tek sudo), sonra kuru çalışmayı yeniden koşun.",
+   "sik_hatalar": "docs/SIK_HATALAR.md#stt-e-arac"
+  },
+  {
+   "kod": "STT-E-GPU",
+   "tur": "hata",
+   "yayinlayan": [
+    "kur.sh --kuru"
+   ],
+   "baslik_en": "NVIDIA GPU, driver >= 570 or 4 GB VRAM not found",
+   "baslik_tr": "NVIDIA kart, sürücü >= 570 ya da 4 GB VRAM yok",
+   "imza": [
+    "[STT-E-GPU]"
+   ],
+   "ilk_adim_en": "Update the Windows or Linux NVIDIA driver; on WSL2 run `wsl --update`; `nvidia-smi` must work inside Ubuntu.",
+   "ilk_adim_tr": "Windows ya da Linux NVIDIA sürücüsünü güncelleyin; WSL2'de `wsl --update`; Ubuntu içinde `nvidia-smi` çalışmalı.",
+   "sik_hatalar": "docs/SIK_HATALAR.md#stt-e-gpu"
+  },
+  {
+   "kod": "STT-E-DISK",
+   "tur": "hata",
+   "yayinlayan": [
+    "kur.sh --kuru"
+   ],
+   "baslik_en": "Less than 8 GiB free at the install root",
+   "baslik_tr": "Kurulum kökünde 8 GiB'den az boş yer",
+   "imza": [
+    "[STT-E-DISK]"
+   ],
+   "ilk_adim_en": "Pick another root with `--kok` on a drive with at least 8 GiB free (about 7 GB is used).",
+   "ilk_adim_tr": "`--kok` ile en az 8 GiB boş yeri olan başka bir sürücüde kök seçin (yaklaşık 7 GB kullanılır).",
+   "sik_hatalar": "docs/SIK_HATALAR.md#stt-e-disk"
+  },
+  {
+   "kod": "STT-E-MANIFEST",
+   "tur": "hata",
+   "yayinlayan": [
+    "kur.sh --kuru"
+   ],
+   "baslik_en": "ayarlar/manifest.json is missing or has no pins",
+   "baslik_tr": "ayarlar/manifest.json yok ya da sabitleri eksik",
+   "imza": [
+    "[STT-E-MANIFEST]"
+   ],
+   "ilk_adim_en": "Restore the file from git (`git checkout -- ayarlar/manifest.json`). Never edit a pin to get past a check.",
+   "ilk_adim_tr": "Dosyayı git'ten geri alın (`git checkout -- ayarlar/manifest.json`). Bir denetimi geçmek için sabiti asla değiştirmeyin.",
+   "sik_hatalar": "docs/SIK_HATALAR.md#stt-e-manifest"
+  },
+  {
+   "kod": "STT-W-RAM",
+   "tur": "uyari",
+   "yayinlayan": [
+    "kur.sh --kuru"
+   ],
+   "baslik_en": "Under 7 GiB of RAM visible",
+   "baslik_tr": "7 GiB'den az RAM görünüyor",
+   "imza": [
+    "[STT-W-RAM]"
+   ],
+   "ilk_adim_en": "The CT2 conversion needs about 4.5 GB free: close other apps; on WSL2 raise the memory limit in `.wslconfig`.",
+   "ilk_adim_tr": "CT2 dönüşümü yaklaşık 4,5 GB boş RAM ister: diğer uygulamaları kapatın; WSL2'de `.wslconfig` bellek sınırını yükseltin.",
+   "sik_hatalar": "docs/SIK_HATALAR.md#stt-w-ram"
+  },
+  {
+   "kod": "STT-W-KOK",
+   "tur": "uyari",
+   "yayinlayan": [
+    "kur.sh --kuru"
+   ],
+   "baslik_en": "The root is on a Windows drive mounted into WSL2",
+   "baslik_tr": "Kök WSL2'ye bağlanmış bir Windows sürücüsünde",
+   "imza": [
+    "[STT-W-KOK]"
+   ],
+   "ilk_adim_en": "It works but loading takes minutes per file; use `--kok ~/stt` on the Linux filesystem for speed.",
+   "ilk_adim_tr": "Çalışır ama her dosyada yükleme dakikalar sürer; hız için Linux dosya sisteminde `--kok ~/stt` kullanın.",
+   "sik_hatalar": "docs/SIK_HATALAR.md#stt-w-kok"
+  },
+  {
+   "kod": "STT-W-DISK",
+   "tur": "uyari",
+   "yayinlayan": [
+    "kur.sh --kuru"
+   ],
+   "baslik_en": "Free disk space could not be measured",
+   "baslik_tr": "Boş disk ölçülemedi",
+   "imza": [
+    "[STT-W-DISK]"
+   ],
+   "ilk_adim_en": "Check free space yourself with `df -h <root>` (8 GiB needed).",
+   "ilk_adim_tr": "Boş yeri `df -h <kök>` ile kendiniz bakın (8 GiB gerekir).",
+   "sik_hatalar": "docs/SIK_HATALAR.md#stt-w-disk"
+  },
+  {
+   "kod": "STT-E-WSL",
+   "tur": "hata",
+   "yayinlayan": [
+    "kur.ps1"
+   ],
+   "baslik_en": "wsl.exe not found",
+   "baslik_tr": "wsl.exe bulunamadı",
+   "imza": [
+    "wsl.exe yok"
+   ],
+   "ilk_adim_en": "Install WSL2 once as administrator: `wsl --install -d Ubuntu`, reboot, open Ubuntu once, then run the installer again.",
+   "ilk_adim_tr": "WSL2'yi bir kez yönetici olarak kurun: `wsl --install -d Ubuntu`, yeniden başlatın, Ubuntu'yu bir kez açın, sonra kurulumu tekrar çalıştırın.",
+   "sik_hatalar": "docs/SIK_HATALAR.md#stt-e-wsl"
+  },
+  {
+   "kod": "STT-E-PIP",
+   "tur": "hata",
+   "yayinlayan": [
+    "kur.sh"
+   ],
+   "baslik_en": "pip finds no ctranslate2-crisperwhisper wheel",
+   "baslik_tr": "pip ctranslate2-crisperwhisper tekerini bulamıyor",
+   "imza": [
+    "no matching distribution"
+   ],
+   "ilk_adim_en": "The CT2 fork has Linux x86_64 wheels only: use WSL2 or Linux, not native Windows or macOS Python.",
+   "ilk_adim_tr": "CT2 çatalının yalnız Linux x86_64 tekeri var: yerel Windows ya da macOS Python'u değil, WSL2 ya da Linux kullanın.",
+   "sik_hatalar": "docs/SIK_HATALAR.md#stt-e-pip"
+  },
+  {
+   "kod": "STT-E-SHA",
+   "tur": "hata",
+   "yayinlayan": [
+    "kur.sh, kur_hizalama"
+   ],
+   "baslik_en": "A download does not match its pinned sha256",
+   "baslik_tr": "İndirme sabit sha256 ile uyuşmuyor",
+   "imza": [
+    "sha256 tutmadı"
+   ],
+   "ilk_adim_en": "Re-run the installer (partial files are removed). If it persists the upstream file changed: open an issue, do not edit the manifest or relax the check.",
+   "ilk_adim_tr": "Kurulumu yeniden çalıştırın (yarım dosyalar silinir). Sürerse kaynak dosya değişmiştir: issue açın, manifest'i değiştirmeyin, denetimi gevşetmeyin.",
+   "sik_hatalar": "docs/SIK_HATALAR.md#stt-e-sha"
+  },
+  {
+   "kod": "STT-E-KONTROL",
+   "tur": "hata",
+   "yayinlayan": [
+    "transkript --kontrol"
+   ],
+   "baslik_en": "CUDA int8 or a real torch CUDA kernel does not run",
+   "baslik_tr": "CUDA int8 ya da gerçek bir torch CUDA çekirdeği çalışmıyor",
+   "imza": [
+    "KONTROL_HATA",
+    "no kernel image",
+    "CUDA int8 ya da torch CUDA yok",
+    "torch CUDA kernel failed"
+   ],
+   "ilk_adim_en": "Check the driver (>= 570) and `nvidia-smi` inside WSL; keep the pinned cu126 torch wheel from `requirements.txt` (cu128 Linux wheels drop GTX 10xx kernels); do not upgrade torch.",
+   "ilk_adim_tr": "Sürücüyü (>= 570) ve WSL içinde `nvidia-smi`'yi kontrol edin; `requirements.txt`'teki cu126 torch tekerini koruyun (cu128 Linux tekerleri GTX 10xx çekirdeklerini düşürür); torch'u yükseltmeyin.",
+   "sik_hatalar": "docs/SIK_HATALAR.md#stt-e-kontrol"
+  },
+  {
+   "kod": "STT-E-RAM",
+   "tur": "hata",
+   "yayinlayan": [
+    "kur.sh model step"
+   ],
+   "baslik_en": "Conversion killed or MemoryError",
+   "baslik_tr": "Dönüşüm öldürüldü ya da MemoryError",
+   "imza": [
+    "MemoryError",
+    "Killed"
+   ],
+   "ilk_adim_en": "Free at least 4.5 GB of RAM (close apps) and re-run only the step: `--adim model`.",
+   "ilk_adim_tr": "En az 4,5 GB RAM boşaltın (uygulamaları kapatın) ve yalnız o adımı yeniden koşun: `--adim model`.",
+   "sik_hatalar": "docs/SIK_HATALAR.md#stt-e-ram"
+  },
+  {
+   "kod": "STT-E-VRAM",
+   "tur": "hata",
+   "yayinlayan": [
+    "transkript alignment"
+   ],
+   "baslik_en": "Out of memory in alignment on a 4 GB card",
+   "baslik_tr": "4 GB kartta hizalamada bellek bitti",
+   "imza": [
+    "out of memory",
+    "OutOfMemoryError"
+   ],
+   "ilk_adim_en": "Use `--hizalama-cihazi cpu` (slower) or a shorter audio file; report with the `kelimeler.json` if it still fails.",
+   "ilk_adim_tr": "`--hizalama-cihazi cpu` (daha yavaş) ya da daha kısa ses kullanın; yine düşerse `kelimeler.json` ile bildirin.",
+   "sik_hatalar": "docs/SIK_HATALAR.md#stt-e-vram"
+  },
+  {
+   "kod": "STT-E-FFMPEG",
+   "tur": "hata",
+   "yayinlayan": [
+    "transkript ses"
+   ],
+   "baslik_en": "Audio could not be decoded (video or unusual container)",
+   "baslik_tr": "Ses çözülemedi (video ya da alışılmadık kap)",
+   "imza": [
+    "ses çözülemedi"
+   ],
+   "ilk_adim_en": "Install ffmpeg (`sudo apt install ffmpeg`) or extract the audio to wav/flac/mp3 first.",
+   "ilk_adim_tr": "ffmpeg kurun (`sudo apt install ffmpeg`) ya da sesi önce wav/flac/mp3 olarak çıkarın.",
+   "sik_hatalar": "docs/SIK_HATALAR.md#stt-e-ffmpeg"
+  },
+  {
+   "kod": "STT-E-DIL",
+   "tur": "hata",
+   "yayinlayan": [
+    "transkript akis"
+   ],
+   "baslik_en": "No alignment model for the language",
+   "baslik_tr": "Dil için hizalama modeli yok",
+   "imza": [
+    "hizalama modeli yok"
+   ],
+   "ilk_adim_en": "Pass `--hizalama-modeli <HF wav2vec2 CTC id>` together with `--hizalama-revizyon <commit>` (see `docs/diller.md`).",
+   "ilk_adim_tr": "`--hizalama-modeli <HF wav2vec2 CTC id>` ile birlikte `--hizalama-revizyon <commit>` verin (`docs/diller.md`).",
+   "sik_hatalar": "docs/SIK_HATALAR.md#stt-e-dil"
+  }
+ ]
+}
