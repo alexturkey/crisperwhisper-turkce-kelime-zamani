@@ -16,6 +16,13 @@ Hard rules for agents in this repo:
 - `--hizalama-modeli` takes a Hugging Face id (`user/model`); always pass `--hizalama-revizyon <commit>` with it so the
   download is pinned (the table models are pinned in `ayarlar/manifest.json`; the English torchaudio bundle too).
 
+## First, do this (agents)
+- **Run first:** `bash scripts/tani.sh` (read-only). It prints the system, the card, Python, tools, free disk and a DEVIATIONS section (first Python on PATH, locally changed files, `STT_*` variable names). Read it to the user in plain words.
+- **Keep a notebook:** `DURUM.md` in the repo root (git-ignored; `<ROOT>` instead of paths). Top three lines: `Now:` / `Next:` / `Question for you:`; below, one line per step with [measured] / [read] / [guess] and the command it came from.
+- **NEVER:** accept the CrisperWhisper model license for the user; lower a quality value; use a force flag; change system Python or PATH.
+- **ASK first:** delete, move or re-download anything; install packages or models; start a GPU run.
+- **Same error twice:** stop; take the code and the first 20 log lines to the user.
+
 ## 0. Prerequisites
 
 | Need | Check | Expected | If missing |

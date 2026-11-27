@@ -3,6 +3,7 @@
 ## Unreleased
 
 **TR**
+- Ajan karşılama (kit KL-23): `AGENTS_HIZLI.md` ve `AGENTS.md` tepesinde "önce bunu yap" bloğu (önce `bash scripts/tani.sh`, git dışı `DURUM.md` defteri, ASLA/ÖNCE SOR listeleri, aynı hata iki kez dur), README'de tek cümlelik "ajanınıza verin" bloğu, `scripts/tani.sh`'a salt okur SAPMA bölümü (değişken değerleri basılmaz). Kalite ve çalışma davranışı değişmedi.
 - Kurulumda `--kuru` (Windows: `kur.ps1 -Kuru`, çift tık: `scripts/kur.cmd`): hiçbir şey yazmaz ya da indirmez; kart, sürücü, disk, RAM ve araç eksiklerini tek listede, `[STT-E-...]` kodlarıyla basar (eksik varsa çıkış 3). Varsayılan kurulum davranışı değişmedi.
 - Yerel teşhis `scripts/tani.sh` (kişisel ad ve yolları siler, ağa çıkmaz); hata kodları `docs/hata_imzalari.json` ve `docs/SIK_HATALAR.md`.
 - Hızlı denetim `scripts/denetim.py --hizli` (gizlilik ve gizli karakter taraması, sabit sürümler, manifest, kalite sabitleri, README çeviri eşliği), `scripts/on_kontrol.sh`, CI (rapor modu, eylemler SHA'ya sabit).
@@ -11,6 +12,7 @@
 - Boş issue kapalı; güvenlik bildirimi ve destek bağlantıları issue ekranında.
 
 **EN**
+- Agent onboarding (kit KL-23): a do-this-first block at the top of `AGENTS_HIZLI.md` and `AGENTS.md` (run `bash scripts/tani.sh` first, git-ignored `DURUM.md` notebook, NEVER / ASK lists, same error twice stop), a one-sentence "give this to your agent" block in the README, and a read-only DEVIATIONS section in `scripts/tani.sh` (variable values are never printed). Quality and run behaviour unchanged.
 - Install gets `--kuru` (Windows: `kur.ps1 -Kuru`, double-click: `scripts/kur.cmd`): writes and downloads nothing; lists missing GPU, driver, disk, RAM and tools in one list with `[STT-E-...]` codes (exit 3 if anything is missing). The default install behaviour is unchanged.
 - Local diagnosis `scripts/tani.sh` (strips personal names and paths, no network); error codes in `docs/hata_imzalari.json` and `docs/SIK_HATALAR.md`.
 - Quick checks `scripts/denetim.py --hizli` (privacy and hidden-character scan, pinned versions, manifest, quality constants, README translation parity), `scripts/on_kontrol.sh`, CI (report mode, actions pinned to SHAs).

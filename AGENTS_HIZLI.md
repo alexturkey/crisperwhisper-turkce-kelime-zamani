@@ -2,6 +2,20 @@
 
 English first, Türkçe below. Full rules and evidence: [`AGENTS.md`](AGENTS.md) (it wins if the two ever differ). Error codes: `docs/hata_imzalari.json`, `docs/SIK_HATALAR.md`.
 
+## Do this first (English)
+- **Run first:** `bash scripts/tani.sh` (read-only: no network, writes nothing). It prints the system, the card, Python, tools, free disk and a DEVIATIONS section (first Python on PATH, locally changed files, `STT_*` variable names). Read it to the user in plain words.
+- **Keep a notebook:** `DURUM.md` in the repo root (git-ignored, `<ROOT>` instead of paths). Top three lines: `Now:` / `Next:` / `Question for you:`. Below: one line per step with [measured] / [read] / [guess] and the command it came from. Update it after every step so a cut-off session can continue.
+- **NEVER:** accept the CrisperWhisper model license for the user, lower a quality value (pinned model commits and sha256, CT2 int8, the two-process design), use a force flag, change system Python or PATH.
+- **ASK first:** delete, move or re-download anything (show path, size, reason); install packages or models; start a GPU run.
+- **Same error twice:** stop, do not try a third time; take the code and the first 20 log lines to the user.
+
+## Önce bunu yap (Türkçe)
+- **Önce çalıştır:** `bash scripts/tani.sh` (salt okur: ağ yok, dosya yazmaz). Sistemi, kartı, Python'u, araçları, boş diski ve SAPMA bölümünü (PATH'te ilk Python, yerelde değişmiş dosyalar, `STT_*` değişken adları) yazar. Kullanıcıya sade sözle oku.
+- **Defter tut:** repo kökünde `DURUM.md` (git dışı, yol yerine `<ROOT>`). En üstte üç satır: `Şu an:` / `Sırada:` / `Sana soru:`. Altında adım başına bir satır: [ölçtüm] / [okudum] / [tahmin] ve geldiği komut. Her adımdan sonra güncelle ki kesilen oturum kaldığı yerden sürsün.
+- **ASLA:** CrisperWhisper model lisansını kullanıcı yerine kabul etme, kalite değerini düşürme (sabitlenmiş model sürümleri ve sha256, CT2 int8, iki süreçli tasarım), zorlama bayrağı kullanma, sistem Python'unu ya da PATH'i değiştirme.
+- **Önce SOR:** bir şeyi silmeden, taşımadan ya da yeniden indirmeden (yolu, boyutu, nedeni göster); paket ya da model kurmadan; GPU işi başlatmadan.
+- **Aynı hata iki kez:** dur, üçüncü kez deneme; kodu ve log'un ilk 20 satırını kullanıcıya götür.
+
 ## English: decision tree (12 steps)
 1. Goal: verbatim speech-to-text with word timestamps on Linux or Windows via WSL2 with an NVIDIA card of 4 GB or more. Anything else: tell the user and stop.
 2. Quality is fixed (pinned model commits and sha256, CT2 int8 compute, the cu126 torch wheel, the two-process ASR then alignment design). Never lower it to save time or memory.

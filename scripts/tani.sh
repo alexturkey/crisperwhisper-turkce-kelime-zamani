@@ -58,6 +58,15 @@ echo ".venv: $([[ -x "$REPO/.venv/bin/python" ]] && echo var || echo yok)"
 if [[ -x "$REPO/.venv/bin/python" ]]; then
   echo "torch/ct2: $("$REPO/.venv/bin/python" -I -c 'import torch, ctranslate2; print("torch", torch.__version__, "cuda", torch.cuda.is_available(), "| ctranslate2", ctranslate2.__version__)' 2>&1 | tail -n 1)"
 fi
+echo "SAPMA / DEVIATIONS (salt okur):"
+echo "  PATH'te ilk python3: $(command -v python3 2>/dev/null || echo yok) ($PYV)"
+if [[ -d "$REPO/.git" ]] && command -v git >/dev/null 2>&1; then
+  DEG="$(git --no-optional-locks -C "$REPO" status --short -uno 2>/dev/null | head -40)"
+  if [[ -z "$DEG" ]]; then echo "  git: izlenen dosyalar değişmemiş"; else echo "  git: değişmiş izlenen dosyalar (yalnız adlar):"; echo "$DEG" | sed 's/^/    /'; fi
+fi
+SENV="$(env | awk -F= '/^(STT_|HF_|PIP_|TORCH_|CT2_)/ {print $1}' | sort | tr '
+' ' ')"
+echo "  STT_/HF_/PIP_/TORCH_ ortam değişkenleri (yalnız adlar, değerler basılmaz): ${SENV:-yok}"
 echo "-- sorun için: docs/SIK_HATALAR.md; kurulum öncesi denetim: bash scripts/kur.sh --kok <kök> --kuru"
 echo "-- Bu çıktıyı issue'ya koymadan önce kendiniz okuyun; kişisel ad ve yollar <HOME>/<USER>/<HOST> ile silindi."
 }

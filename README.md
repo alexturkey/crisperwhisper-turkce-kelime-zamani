@@ -11,6 +11,8 @@ for every language the models know (`docs/diller.md`). Linux or Windows via WSL2
 > License). This repository's code is Apache-2.0, but running it inside a paid product needs a commercial license from
 > Nyra Health. Weights are not in this repo; the installer downloads them from a pinned commit. See [NOTICE](NOTICE).
 
+> **Using an AI coding agent (Codex, Claude Code, Gemini, Cursor)?** Give it this one sentence: "Read `AGENTS_HIZLI.md` to the end, run `bash scripts/tani.sh` first, keep your progress in `DURUM.md`, and ask me before you delete or move anything, change system Python or PATH, or lower a quality setting." The agent will diagnose this PC, write a checklist and ask you at every decision.
+
 ## Quick start
 
 1. **Check your machine first, nothing is downloaded:** `bash scripts/kur.sh --kok ~/stt --kuru` (Windows: `scripts\kur.cmd` and type a short folder such as `E:\stt`, or `powershell -NoProfile -ExecutionPolicy Bypass -File scripts\kur.ps1 -Kok E:\stt -Kuru`). It lists every missing piece (GPU, driver, disk, RAM, tools) in one go.

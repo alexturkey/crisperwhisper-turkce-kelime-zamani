@@ -11,6 +11,8 @@ hizalama her kelimeye başlangıç ve bitiş saniyesi verir. Çıktı: metin, ke
 > Research License). Bu deponun kodu Apache-2.0'dır ama aracı ücretli bir üründe çalıştırmak Nyra Health'ten ticari
 > lisans ister. Ağırlıklar depoda yok; kurulum betiği sabit bir commit'ten indirir. Bkz. [NOTICE](NOTICE).
 
+> **Yapay zeka ajanı (Codex, Claude Code, Gemini, Cursor) mı kullanıyorsunuz?** Ona şu cümleyi verin: "`AGENTS_HIZLI.md` dosyasını sonuna kadar oku, önce `bash scripts/tani.sh` çalıştır, ilerlemeni `DURUM.md` dosyasında tut; bir şeyi silmeden ya da taşımadan, sistem Python'unu ya da PATH'i değiştirmeden veya kalite ayarını düşürmeden önce bana sor." Ajan bu bilgisayarı teşhis eder, kontrol listesi yazar ve her kararda size sorar.
+
 ## Hızlı başlangıç
 
 1. **Önce makinenizi denetleyin, hiçbir şey inmez:** `bash scripts/kur.sh --kok ~/stt --kuru` (Windows: `scripts\kur.cmd` çalıştırıp `E:\stt` gibi kısa bir klasör yazın, ya da `powershell -NoProfile -ExecutionPolicy Bypass -File scripts\kur.ps1 -Kok E:\stt -Kuru`). Eksik her şeyi (kart, sürücü, disk, RAM, araçlar) tek listede gösterir.
